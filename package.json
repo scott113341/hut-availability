@@ -8,27 +8,20 @@
   "homepage": "https://github.com/scott113341/hut-availability",
   "bugs": "https://github.com/scott113341/hut-availability/issues",
   "scripts": {
-    "build": "babel --copy-files --out-dir lib/ src/",
-    "prebuild": "npm run clean",
-    "clean": "shx rm -rf lib/ && shx mkdir lib/",
-    "test": "semistandard && node lib/test/index.js",
-    "ci:test": "node lib/test/index.js"
+    "bootstrap": "lerna clean && lerna bootstrap && lerna run build",
+    "lint": "semistandard",
+    "test": "lerna run test",
+    "test:ci": "lerna run test:ci && semistandard"
   },
-  "dependencies": {},
   "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-cli": "^6.10.1",
+    "babel-plugin-transform-async-to-generator": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
     "lerna": "2.0.0-beta.30",
-    "np": "^2.9.0",
-    "semistandard": "^9.0.0",
-    "shx": "^0.1.4",
-    "tape": "^4.6.0"
+    "semistandard": "scott113341/semistandard"
   },
   "semistandard": {
     "ignore": [
-      "/lib/"
+      "lib/"
     ]
   }
 }

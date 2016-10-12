@@ -1,6 +1,6 @@
 export default [
   {
-    name: "McNamara Hut",
+    name: 'McNamara Hut',
     capacity: 18
   }
 ];

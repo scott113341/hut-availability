@@ -6,23 +6,23 @@ export default async function getAvailability (startDate, endDate) {
   const urls = urlsFor(startDate, endDate);
   const responses = await Promise.all(urls.map(url => request.get(url)));
   const avails = responses.map(res => availabilityFromHtml(res.text));
+  return combineAvailabilities(avails, startDate, endDate);
+}
 
-  const avail = [];
-  const days = endDate.diff(startDate, 'days');
-  avails[0].forEach((hut, i) => {
-    const otherAvails = avails.slice(1).map(a => a[i].availability);
-    const availability = hut.availability
-      .concat(otherAvails.reduce((a, c) => a.concat(c), []))
-      .slice(0, days - 1);
+export function urlFor (startDate) {
+  return `http://www.huts.org/getPage.php?page=oShowHutAvail.asp&thisWeek=${startDate.format('l')}`;
+}
 
-    avail.push({
-      name: hut.name,
-      availability: availability,
-      capacity: Math.max(...availability)
-    });
-  });
+export function urlsFor (startDate, endDate) {
+  const urls = [];
+  const start = moment(startDate);
 
-  return avail;
+  while (start.isSameOrBefore(endDate)) {
+    urls.push(urlFor(start));
+    start.add(1, 'w');
+  }
+
+  return urls;
 }
 
 export function availabilityFromHtml (html) {
@@ -51,18 +51,21 @@ export function availabilityFromHtml (html) {
   return rows.get();
 }
 
-export function urlFor (startDate) {
-  return `http://www.huts.org/getPage.php?page=oShowHutAvail.asp&thisWeek=${startDate.format('l')}`;
-}
+export function combineAvailabilities (avails, startDate, endDate) {
+  const avail = [];
+  const days = endDate.diff(startDate, 'days');
+  avails[0].forEach((hut, i) => {
+    const otherAvails = avails.slice(1).map(a => a[i].availability);
+    const availability = hut.availability
+      .concat(otherAvails.reduce((a, c) => a.concat(c), []))
+      .slice(0, days + 1);
 
-export function urlsFor (startDate, endDate) {
-  const urls = [];
-  const start = moment(startDate);
+    avail.push({
+      name: hut.name,
+      availability,
+      capacity: Math.max(...availability)
+    });
+  });
 
-  while (start.isSameOrBefore(endDate)) {
-    urls.push(urlFor(start));
-    start.add(1, 'w');
-  }
-
-  return urls;
+  return avail;
 }

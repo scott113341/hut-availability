@@ -1,6 +1,5 @@
 const moment = require('moment');
 
-const filters = require('./lib/filters.js');
 const getAvailability = require('./lib/get-availability.js').default;
 
 const nights = 2;
@@ -8,18 +7,18 @@ const startDate = moment('2016-12-16');
 const endDate = moment('2017-01-17');
 const onlyWeekends = false;
 const huts = [
-  "McNamara Hut",
+  'McNamara Hut',
   "Margy's Hut",
-  "Harry Gates Hut",
-  "Peter Estin Hut",
-  "Polar Star Inn",
-  "Fowler-Hilliard Hut",
-  "Jackal Hut",
+  'Harry Gates Hut',
+  'Peter Estin Hut',
+  'Polar Star Inn',
+  'Fowler-Hilliard Hut',
+  'Jackal Hut',
   "Vance's Cabin",
-  "Sangree M. Froelicher Hut",
-  "10th Mountain Div. Hut",
+  'Sangree M. Froelicher Hut',
+  '10th Mountain Div. Hut',
   "Uncle Bud's Hut",
-  "Betty Bear Hut",
+  'Betty Bear Hut',
   "Francie's Cabin",
   "Janet's Cabin"
 ];

@@ -9,9 +9,9 @@ export function huts (...hutNames) {
 export function nights (min, max = min) {
   return () => {
 
-  }
+  };
 }
 
-export function daysOfWeek(...days) {
+export function daysOfWeek (...days) {
 
 }

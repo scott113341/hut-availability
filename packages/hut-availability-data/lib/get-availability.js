@@ -3,9 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.availabilityFromHtml = availabilityFromHtml;
 exports.urlFor = urlFor;
 exports.urlsFor = urlsFor;
+exports.availabilityFromHtml = availabilityFromHtml;
+exports.combineAvailabilities = combineAvailabilities;
 
 var _cheerio = require('cheerio');
 
@@ -34,25 +35,7 @@ exports.default = function () {
     var avails = responses.map(function (res) {
       return availabilityFromHtml(res.text);
     });
-
-    var avail = [];
-    var days = endDate.diff(startDate, 'days');
-    avails[0].forEach(function (hut, i) {
-      var otherAvails = avails.slice(1).map(function (a) {
-        return a[i].availability;
-      });
-      var availability = hut.availability.concat(otherAvails.reduce(function (a, c) {
-        return a.concat(c);
-      }, [])).slice(0, days - 1);
-
-      avail.push({
-        name: hut.name,
-        availability: availability,
-        capacity: Math.max.apply(Math, _toConsumableArray(availability))
-      });
-    });
-
-    return avail;
+    return combineAvailabilities(avails, startDate, endDate);
   });
 
   function getAvailability(_x, _x2) {
@@ -61,6 +44,22 @@ exports.default = function () {
 
   return getAvailability;
 }();
+
+function urlFor(startDate) {
+  return 'http://www.huts.org/getPage.php?page=oShowHutAvail.asp&thisWeek=' + startDate.format('l');
+}
+
+function urlsFor(startDate, endDate) {
+  var urls = [];
+  var start = (0, _moment2.default)(startDate);
+
+  while (start.isSameOrBefore(endDate)) {
+    urls.push(urlFor(start));
+    start.add(1, 'w');
+  }
+
+  return urls;
+}
 
 function availabilityFromHtml(html) {
   var badRows = [0, 1, 27];
@@ -87,18 +86,23 @@ function availabilityFromHtml(html) {
   return rows.get();
 }
 
-function urlFor(startDate) {
-  return 'http://www.huts.org/getPage.php?page=oShowHutAvail.asp&thisWeek=' + startDate.format('l');
-}
+function combineAvailabilities(avails, startDate, endDate) {
+  var avail = [];
+  var days = endDate.diff(startDate, 'days');
+  avails[0].forEach(function (hut, i) {
+    var otherAvails = avails.slice(1).map(function (a) {
+      return a[i].availability;
+    });
+    var availability = hut.availability.concat(otherAvails.reduce(function (a, c) {
+      return a.concat(c);
+    }, [])).slice(0, days + 1);
 
-function urlsFor(startDate, endDate) {
-  var urls = [];
-  var start = (0, _moment2.default)(startDate);
+    avail.push({
+      name: hut.name,
+      availability: availability,
+      capacity: Math.max.apply(Math, _toConsumableArray(availability))
+    });
+  });
 
-  while (start.isSameOrBefore(endDate)) {
-    urls.push(urlFor(start));
-    start.add(1, 'w');
-  }
-
-  return urls;
+  return avail;
 }
