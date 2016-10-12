@@ -65,7 +65,7 @@ function availabilityFromHtml(html) {
   var badRows = [0, 1, 27];
   var $ = _cheerio2.default.load(html);
   var rows = $('tr').filter(function (i) {
-    return !badRows.includes(i);
+    return badRows.indexOf(i) === -1;
   }).map(function (i, row) {
     var availability = $(row).find('td').slice(1, 8).map(function (i, td) {
       return $(td).text();

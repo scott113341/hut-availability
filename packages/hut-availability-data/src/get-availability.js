@@ -29,7 +29,7 @@ export function availabilityFromHtml (html) {
   const badRows = [0, 1, 27];
   const $ = cheerio.load(html);
   const rows = $('tr')
-    .filter(i => !badRows.includes(i))
+    .filter(i => badRows.indexOf(i) === -1)
     .map((i, row) => {
       const availability = $(row)
         .find('td')
