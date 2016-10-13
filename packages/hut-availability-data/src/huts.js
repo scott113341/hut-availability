@@ -1,6 +1,31 @@
 export default [
-  {
-    name: 'McNamara Hut',
-    capacity: 18
-  }
-];
+  { name: 'Fritz\'s', capacity: 10 },
+  { name: 'Fabi\'s', capacity: 6 },
+  { name: 'McNamara Hut', capacity: 16 },
+  { name: 'Margy\'s Hut', capacity: 16 },
+  { name: 'Harry Gates Hut', capacity: 16 },
+  { name: 'Peter Estin Hut', capacity: 16 },
+  { name: 'Polar Star Inn', capacity: 19 },
+  { name: 'Seipel Hut', capacity: 6 },
+  { name: 'Shrine Mtn-Jay\'s', capacity: 8 },
+  { name: 'Shrine Mtn-Chuck\'s Up', capacity: 6 },
+  { name: 'Shrine Mtn-Chuck\'s Down', capacity: 6 },
+  { name: 'Shrine Mtn-Walter\'s Up', capacity: 6 },
+  { name: 'Shrine Mtn-Walter\'s Down', capacity: 6 },
+  { name: 'Fowler-Hilliard Hut', capacity: 16 },
+  { name: 'Jackal Hut', capacity: 16 },
+  { name: 'Vance\'s Cabin', capacity: 16 },
+  { name: 'Continental Divide Cabin', capacity: 8 },
+  { name: 'Point Breeze Cabin', capacity: 8 },
+  { name: 'Sangree M. Froelicher Hut', capacity: 16 },
+  { name: '10th Mountain Div. Hut', capacity: 16 },
+  { name: 'Uncle Bud\'s Hut', capacity: 16 },
+  { name: 'Skinner Hut', capacity: 16 },
+  { name: 'Betty Bear Hut', capacity: 16 },
+  { name: 'Ben Eiseman Hut', capacity: 16 },
+  { name: 'Broome Hut', capacity: 16 },
+  { name: 'Ken\'s Cabin', capacity: 3 },
+  { name: 'Section House', capacity: 12 },
+  { name: 'Francie\'s Cabin', capacity: 20 },
+  { name: 'Janet\'s Cabin', capacity: 20 }
+]
