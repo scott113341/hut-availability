@@ -28,7 +28,6 @@ swag(moment('2016-12-16'), moment('2017-01-17'), 2, {
 });
 
 function swag (startDate, endDate, nights, { huts = [], excludeDates = [], onlyDays = [] }) {
-  return;
   return getAvailability(startDate, endDate)
     .then(avail => avail.filter(a => huts.length ? huts.includes(a.name) : true))
     .then(avail => {
