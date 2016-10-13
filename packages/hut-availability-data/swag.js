@@ -6,7 +6,7 @@ swag(moment('2016-12-16'), moment('2017-01-17'), 2, {
   excludeDates: [
     moment('2016-12-24'),
     moment('2016-12-25'),
-    moment('2016-12-26'),
+    moment('2016-12-26')
   ],
   // huts: [
   //   'McNamara Hut',
@@ -24,7 +24,7 @@ swag(moment('2016-12-16'), moment('2017-01-17'), 2, {
   //   "Francie's Cabin",
   //   "Janet's Cabin",
   // ],
-  onlyDays: [0, 1, 5, 6],
+  onlyDays: [0, 1, 5, 6]
 });
 
 function swag (startDate, endDate, nights, { huts = [], excludeDates = [], onlyDays = [] }) {

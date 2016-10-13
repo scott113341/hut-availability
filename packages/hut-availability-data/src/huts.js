@@ -28,4 +28,4 @@ export default [
   { name: 'Section House', capacity: 12 },
   { name: 'Francie\'s Cabin', capacity: 20 },
   { name: 'Janet\'s Cabin', capacity: 20 }
-]
+];
